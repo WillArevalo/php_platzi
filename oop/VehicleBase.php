@@ -8,7 +8,7 @@ abstract class VehicleBase //he vuelto la clase abstracta, para que no sea posib
 
 	public function move(){
 		echo $this->startEngine();
-		echo '<br>moving<br>';
+		echo '<br>moving<br><br>';
 	}
 
 	public function getOwner(){

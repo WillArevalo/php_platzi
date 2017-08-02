@@ -19,17 +19,20 @@ try{//Intentar
 }
 
 
-
+echo 'Class Car: <br>';
+$car = new Car('Juakin'); //Declaro un objeto de tipo Car
+$car->move(); //metodo de su propia clase
+echo 'GPS pos: ' . $car->getPos();
 //echo 'Owner car 1: ' . $car->getOwner();
 
 echo 'Class truck 1: <br>';
-$truck = new Truck('Will', 'Pickup');
-$truck->move(); //metodo de su clase
+$truck1 = new Truck('Will', 'Pickup');
+$truck1->move(); //metodo de su clase
 //echo 'Owner Truck: ' . $truck->getOwner();
 
-echo 'Class truck 2: <br>';
-$truck = new Truck('German', 'Pickup');
-$truck->move(); //metodo de su clase
+echo 'Class truck 2:<br>';
+$truck2 = new Truck('German', 'Pickup');
+$truck2->move(); //metodo de su clase
 
 
 echo '<br>Total Trucks: ' . Truck::getTotal() . '<br>';
