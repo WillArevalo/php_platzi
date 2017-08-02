@@ -20,11 +20,15 @@ class Truck extends VehicleBase
 
 		// estamos utilizando este constructor y no el de arriba por lo tanto no sale el mensjae de constructor
 	}
-	public function move(){
-		echo 'Truck: ' . $this->type . ' moving<br>';
-	}
+	//public function move(){
+	//	echo 'Truck: ' . $this->type . ' moving<br>';
+	//}
+	//referencia a la variable count
 	public static function getTotal(){
 		return self::$count;
+	}
+	public function startEngine(){
+		return 'Truck: start engine';
 	}
 }
 

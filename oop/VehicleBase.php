@@ -2,11 +2,12 @@
 
 namespace Vehicles;
 
-class VehicleBase
+abstract class VehicleBase //he vuelto la clase abstracta, para que no sea posible ser instanciadas, solo sirven para ser clases base de otras subclases.
 {
 	protected $owner; // privada solo se puede acceder atravez de metodo get dentro de la misma clase, con protected y es accesible atravez de su clase o clases hijas.
 
 	public function move(){
+		echo $this->startEngine();
 		echo '<br>moving<br>';
 	}
 
@@ -26,6 +27,8 @@ class VehicleBase
 	public function __destruct(){
 		echo '<br><br>destruct';
 	}
+
+	public abstract function startEngine();
 
 }
 

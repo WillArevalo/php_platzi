@@ -26,4 +26,10 @@ $truck->move(); //metodo de su clase
 
 
 echo '<br>Total Trucks: ' . Truck::getTotal() . '<br>';
+
+
+
+//Demostrando que no es bueno tener un clase vehicle
+//$v1 = new \Vehicles\VehicleBase('Alex');
+//$v1->move();
 ?>
