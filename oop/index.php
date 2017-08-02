@@ -2,17 +2,25 @@
 
 include 'vehicles/Car.php';
 include 'vehicles/Truck.php';
-
+include 'vehicles/ToyCar.php';
 //use Vehicles\Car;
 //use Vehicles\Truck;
-use Vehicles\{Truck, Car};
+use Vehicles\{Truck, Car, ToyCar};
+
+try{//Intentar
+	echo 'Class ToyCar: <br>';
+	$toycar = new ToyCar('Elmer'); //DEclaro un objeto de tipo ToyCar
+	$toycar->move(); //metodo de su propia clase
+} catch(Exception $e){//Capturar
+	echo 'This is a toy<br>';
+	//log...
+}finally{ //finalmente, este codigo se ejecutara pase lo que pase.
+	echo 'Finally<br><br>';
+}
 
 
-echo 'Class Car: <br>';
-$car = new Car('Juakin'); //DEclaro un objeto de tipo Car
-$car->move(); //metodo de su propia clase
+
 //echo 'Owner car 1: ' . $car->getOwner();
-echo '<br><br>';
 
 echo 'Class truck 1: <br>';
 $truck = new Truck('Will', 'Pickup');
@@ -39,8 +47,8 @@ echo '<br>Total Trucks: ' . Truck::getTotal() . '<br>';
 	a diferencia de las clases abstractas si pueden tener contenido en cambio la interfaz no.
 	actuara como otro objeto.
 */
-$ser = serialize($car);
-$newCar = unserialize($ser);
+//$ser = serialize($car);
+//$newCar = unserialize($ser);
 
-echo 'NewCar Owner '. $newCar->getOwner() . '<br>';
+//echo 'NewCar Owner '. $newCar->getOwner() . '<br>';
 ?>
