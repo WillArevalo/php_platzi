@@ -8,7 +8,7 @@ class Car
 	private $owner;
 
 	public function move(){
-		echo 'moving<br>';
+		echo '<br>moving<br>';
 	}
 
 	public function getOwner(){
@@ -19,23 +19,22 @@ class Car
 		$this->owner = $owner;
 	}
 
-	//function __construct(argument)
-	//{
-		# code...
-	//}
+	public function __construct($ownerName){
+		$this->owner = $ownerName;
+		echo 'constructor<br>';
+	}
+	public function __destruct(){
+		echo '<br>destruct';
+	}
 
 }
 echo 'Class Car: <br>';
 
 
-$car = new Car(); //DEclaro un objeto de tipo Car
-$car2 = new Car();
+$car = new Car('Max'); //DEclaro un objeto de tipo Car
+$car2 = new Car('Will');
 
 $car->move();
-
-$car->setOwner('Alex');
-$car2->setOwner('Will');
-
 
 echo 'Owner car 1: ' . $car->getOwner();
 echo '<br>';
