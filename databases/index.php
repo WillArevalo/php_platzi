@@ -5,6 +5,11 @@
 	<title>Databases with Platzi</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+		body{
+			background-color: #f0f0f0;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -14,7 +19,7 @@
 				<a href="index.php">Home</a>
 				<ul>
 					<li>
-						<a href="">List Users</a>
+						<a href="list.php">List Users</a>
 					</li>
 					<li>
 						<a href="add.php">Add Users</a>
