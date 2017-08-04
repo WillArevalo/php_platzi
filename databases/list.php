@@ -1,7 +1,7 @@
 <?php  
 require_once 'config.php';
 //Consulta PDO
-$queryResult = $pdo->query("SELECT name, email FROM users");
+$queryResult = $pdo->query("SELECT id, name, email FROM users");
 //fetch(recuperar) recoje cada registro uno por uno 
 //PDO::FETCH_ASSOC recupera por llave y
 //PDO::FETCH_NUM: devuelve un array indexado por el número de columna.
@@ -21,6 +21,7 @@ $queryResult = $pdo->query("SELECT name, email FROM users");
 	<style>
 		body{
 			background-color: #f0f0f0;
+			background-image: url(./summer.jpeg);
 		}
 	</style>
 </head>
@@ -34,16 +35,20 @@ $queryResult = $pdo->query("SELECT name, email FROM users");
 				<div class="col-xs-2 col-sm-2 col-md-2">
 					<a href="index.php"><h2>Home</h2></a>
 				</div>
-				<table class="table table-responsive">
+				<table class="table table-responsive table-striped">
 					<tr>
 						<th>Name</th>
 						<th>Email</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
 					<?php  
 						while ($row = $queryResult->fetch(PDO::FETCH_ASSOC)) {
 							echo '<tr>';
 							echo '<td>' . $row['name'] . '</td>';
 							echo '<td>' . $row['email'] . '</td>';
+							echo '<td><a href="update.php?id=' . $row['id'] . '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a></td>';
+							echo '<td><a class="text-danger" href="delete.php?id=' . $row['id'] . '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</a></td>';
 							echo '</tr>';
 						}
 					?>

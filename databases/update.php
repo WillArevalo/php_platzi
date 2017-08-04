@@ -1,27 +1,34 @@
 <?php  
 require_once 'config.php';
-$result = false;//se inicializa para mas abajo utilizar para comprobacion.
-//Jamas colocar
-//var_dump($_GET);
-//echo '<br>';
-//var_dump($_POST);
+//Esto realiza el update en la tabla
+//Si no esta vacio nuestro variable global Post
+$result = false;
 if (!empty($_POST)) {
-	$name = $_POST['name']; //las llaves vienen del name de los input en el form
-	$email = $_POST['email'];
-	$password = md5($_POST['password']);
-	//Convirtiendo nuestro password en un hash
+	$id = $_POST['id'];
+	$newName = $_POST['name'];
+	$newEmail = $_POST['email'];
 
-	//Utilizando PDO para que no haya SQLinjection las variables preferiblemente con otro nombre
-	$sql = "INSERT INTO users(name, email, password) VALUES(:name, :email, :password)";
+	$sql = "UPDATE users SET name=:name, email=:email WHERE id=:id";
 	$query = $pdo->prepare($sql);
-	//prepare recibe una consulta sql para ser ejecutada y retorna el objeto con la consulta.
 	$result = $query->execute([
-		'name' => $name,
-		'email' => $email,
-		'password' => $password
+		'id' => $id,
+		'name' => $newName,
+		'email' => $newEmail
 	]);
-	//execute ejecuta la consulta que regresa prepare.
-	//En el execute se bindean(enlazan) los registros, 
+	$nameValue = $newName;
+	$emailValue = $newEmail;
+}else{
+	//Esto hace la consulta
+	$id = $_GET['id'];//Obteniendo el valor de la url
+	//var_dump($id);
+	$sql = "SELECT name, email FROM users WHERE id=:id";
+	$query = $pdo->prepare($sql);
+	$query->execute([
+		'id' => $id
+	]);
+	$row = $query->fetch(PDO::FETCH_ASSOC);
+	$nameValue = $row['name'];
+	$emailValue = $row['email'];
 }
 
 ?>
@@ -29,11 +36,12 @@ if (!empty($_POST)) {
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Add | Databases with Platzi</title>
+	<title>Update | Databases with Platzi</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<style>
 		body{
+			background-image: url("background.jpeg");
 			background-color: #f0f0f0;
 		}
 		.flex{
@@ -44,11 +52,12 @@ if (!empty($_POST)) {
 		    height: 100vh;
 		}
 		.flex-child{
-		    border: solid 3px lightgray;
+		    border: solid 2px #f0f0f0;
 		    border-style: dashed;
-		    border-radius: 12px;
-		    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-			
+		    border-radius: 10% 0 10% 0;
+		    /*background: linear-gradient(141deg, #010103 0%, #0d1826 51%, #1a2e36 75%);
+			*/
+			background: rgba(0,0,0,0);
 		}
 		.trans{
 			background: rgba(0,0,0,0);
@@ -60,32 +69,30 @@ if (!empty($_POST)) {
 		<div class="row flex">
 			<div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 flex-child">
 			<br>
-				<h1>Add User</h1>
-				
+				<h1 class="text-info">Update User</h1>
 				<!--Comprobacion para mostrar mensaje success-->
 				<?php  
 
 					if ($result) {
-						echo '<div class="alert alert-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Success!!!</div>';
+						echo '<div class="alert alert-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Update!!!</div>';
 					}else{
 						echo '<div class="alert alert-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> UPSS!!! Something is wrong, try more late.</div>';
 					}
 
 				?>
-				<form class="form-group" action="add.php" method="post">
+				<form class="form-group" action="update.php" method="post">
 				<!--En action se especifica hacia donde se envian los datos-->
 				<!--Por default viene en GET
 				Metodos get:por medio de la url y post, oculto-->
-					<input class="form-control" type="text" name="name" id="name" placeholder="Name">
+					<input class="form-control" type="text" name="name" id="name" placeholder="Name" value="<?php echo $nameValue; ?>">
 					<br>
-					<input class="form-control" type="text" name="email" id="email" placeholder="Email">
+					<input class="form-control" type="text" name="email" id="email" placeholder="Email" value="<?php echo $emailValue; ?>">
 					<br>
-					<input class="form-control" type="password" name="password" id="password" placeholder="Password">
-					<br>
-					<input class="btn btn-primary btn-lg trans" type="submit" value="Save">
+					<input type="hidden" name="id" value="<?php echo $id; ?>">
+					<input class="btn btn-primary btn-lg trans" type="submit" value="Update">
 				</form>
 				<div class="col-xs-1 col-sm-1 col-sm-offset-10 col-md-1 col-md-offset-10">
-					<a href="index.php">Home</a>
+					<a href="list.php">List</a>
 				</div>
 				<br>
 				<br>
