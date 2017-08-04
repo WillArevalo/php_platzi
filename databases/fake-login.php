@@ -8,16 +8,23 @@
 //
 //Se cierra el caso con la comilla se aplica un operador or ppara que la consulta siempre sea verdadera, se cierra y uego se comenta lo demass para adelante. 
 
+
+//Arreglando la consulta, primero no enviar valores directamente, luego pdo debe prepararla yleugo si se ejecuta
+
 $user = null;
 $query = null;
 
 if (!empty($_POST)) {
 	require_once 'config.php';
 	//Al tratar de consultar directamente en la base de datos es que se puede hacer SQLinjection
-	$query = "SELECT * FROM users WHERE email ='" . $_POST['email'] . "' AND  password = '" . md5($_POST['password']) . "'";
-	$queryResult = $pdo->query($query);
+	$query = "SELECT * FROM users WHERE email =:email AND  password = :password";
+	$prepared = $pdo->prepare($query);
+	$prepared->execute([
+		'email' => $_POST['email'],
+		'password' => md5($_POST['password'])
+	]);
 
-	$user = $queryResult->fetch(PDO::FETCH_ASSOC);
+	$user = $prepared->fetch(PDO::FETCH_ASSOC);
 
 
 
