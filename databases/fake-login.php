@@ -10,6 +10,7 @@
 
 
 //Arreglando la consulta, primero no enviar valores directamente, luego pdo debe prepararla yleugo si se ejecuta
+//pdo escapa todos los caracteres
 
 $user = null;
 $query = null;
