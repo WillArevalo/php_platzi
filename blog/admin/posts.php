@@ -65,6 +65,8 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 		      </ul>
 		    </nav>
 		</div>
+		<br>
+		<br>	
 		<div class="row">
 			<div class="col-md-12">
 				<footer>
