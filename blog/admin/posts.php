@@ -1,5 +1,4 @@
 <?php 
-include_once "../config.php";
 //Ordenado por id descendente osea el mas reciente primero
 $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
 $query->execute();
