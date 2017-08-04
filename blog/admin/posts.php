@@ -1,5 +1,5 @@
 <?php 
-include_once "config.php";
+include_once "../config.php";
 //Ordenado por id descendente osea el mas reciente primero
 $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
 $query->execute();
@@ -36,23 +36,26 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-9">
-				<?php foreach($blogPosts as $blogPost): ?>
-					<div class="blog-post">
-						<h2>
-							<?= $blogPost['title'] ?>
-						</h2>
-						<p>
-							Jan 1, 2016 by <a href="#">Will</a>
-						</p>
-						<div class="blog-post-image">
-							<img src="./images/summer.jpeg" alt="" class="img-responsive">
-						</div>
-						<br>
-						<div class="blog-post-content article">
-							<?= $blogPost['content'] ?>
-						</div>
-					</div>
-				<?php endforeach ?>				
+				<h2>Posts</h2>
+				<a href="insert-post.php" class="btn btn-primary btn-lg">New Post</a>
+				<table class="table-responsive table-striped table-hover col-sm-12 col-md-12">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($blogPosts as $blogPost): ?>
+							<tr>
+								<td><?= $blogPost['title'] ?></td>
+								<td>Edit</td>
+								<td>Delete</td>
+							</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>				
 			</div>
 			<nav class="hidden-xs hidden-sm col-md-3">
 		      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
@@ -66,8 +69,8 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 			<div class="col-md-12">
 				<footer>
 					This is a footer <br>
-					<div class="col-xs-12 col-sm-12 col-md-2 col-md-push-10">
-						<a class="text-muted" href="admin/index.php">Admin Panel</a>
+					<div class="col-xs-4 col-xs-push-8 col-sm-2 col-sm-push-10 col-md-2 col-md-push-10">
+						<a class="text-muted small" href="./index.php">Admin Panel</a>
 					</div>
 				</footer>			
 			</div>

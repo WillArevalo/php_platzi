@@ -1,10 +1,6 @@
 <?php 
-include_once "config.php";
-//Ordenado por id descendente osea el mas reciente primero
-$query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-$query->execute();
-//fetchAll recupera todos los posts
-$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
+include_once "../config.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,23 +32,26 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-9">
-				<?php foreach($blogPosts as $blogPost): ?>
-					<div class="blog-post">
-						<h2>
-							<?= $blogPost['title'] ?>
-						</h2>
-						<p>
-							Jan 1, 2016 by <a href="#">Will</a>
-						</p>
-						<div class="blog-post-image">
-							<img src="./images/summer.jpeg" alt="" class="img-responsive">
-						</div>
-						<br>
-						<div class="blog-post-content article">
-							<?= $blogPost['content'] ?>
-						</div>
-					</div>
-				<?php endforeach ?>				
+				<div class="col-xs-10 col-sm-10 col-md-10">
+					<h2>New Post</h2>
+				</div>
+				<div class="col-xs-2 col-sm-2 col-md-2">
+					<a href="./posts.php" class="btn btn-default btn-xs">Back</a>
+				</div>
+				<br>
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<form action="insert-post.php" method="post">
+					<div class="form-group">
+				      <label for="inputTitle">Title:</label>
+				      <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Someone awesome title" name="email">
+				    </div>
+				    <div class="form-group">
+				      <label for="inputContent">Content:</label>
+				      <textarea name="content" id="inputContent" rows="5" class="form-control" placeholder="Your awesome article here!"></textarea>
+				    </div>
+				    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+					</form>	
+				</div>		
 			</div>
 			<nav class="hidden-xs hidden-sm col-md-3">
 		      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
@@ -66,8 +65,8 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 			<div class="col-md-12">
 				<footer>
 					This is a footer <br>
-					<div class="col-xs-12 col-sm-12 col-md-2 col-md-push-10">
-						<a class="text-muted" href="admin/index.php">Admin Panel</a>
+					<div class="col-xs-4 col-xs-push-8 col-sm-2 col-sm-push-10 col-md-2 col-md-push-10">
+						<a class="text-muted small" href="./index.php">Admin Panel</a>
 					</div>
 				</footer>			
 			</div>
