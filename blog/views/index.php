@@ -1,10 +1,3 @@
-<?php 
-//Ordenado por id descendente osea el mas reciente primero
-$query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-$query->execute();
-//fetchAll recupera todos los posts
-$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
