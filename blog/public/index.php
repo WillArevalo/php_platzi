@@ -11,10 +11,31 @@ require_once '../vendor/autoload.php';
 //Lo he retirado de los demas index, y lo he puesto aqui.
 include_once "../config.php";
 
+//obtener el directorio base con esto...
+$baseUrl = '';
+$baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+$baseUrl = 'https://' . $_SERVER['HTTP_HOST'] . $baseDir; // 'https://' . $_SERVER['HTTP_HOST'] = string(17) "https://localhost"
+define('BASE_URL', $baseUrl);//define(define una constante)Atrubutos(nombre, constante);
+
+//Str_replace permite reemplazar una cadena, str_replace(<lo que quieres reemplazar>, <por lo que vas a reemplazar>, <en donde lo quires reemplazar>) me va a regresar la direccion sin el archivo al que ingreso /PHP_platzi/php_platzi/blog/public/
+
+//Que regresa baseDir = string(44) "/PHP_platzi/php_platzi/blog/public/index.php"
+//Con basename obtenemos = string(9) "index.php"
+//var_dump($baseDir); //= /PHP_platzi/php_platzi/blog/public/
+
 //Para poder llamar las paginas pendientes
 //traza una ruta(route) 
 //con un get si existe y si no se asume que estamos en la base de la aplicacion
 $route = $_GET['route'] ?? '/';
+
+function render($fileName, $params = []){
+	ob_start(); //omite cualquier salida que tenga, y la guarda internamente
+	extract($params);//toma un arreglo asociativo y los convierte en string osea como [hola, k, ase] = hola k ase
+	include $fileName;
+
+	return ob_get_clean(); //Regresa todo lo hecho en la funcion.
+}
+
 
 use Phroute\Phroute\RouteCollector;
 
@@ -26,7 +47,7 @@ $router->get('/', function() use($pdo){
 	$query->execute();
 	//fetchAll recupera todos los posts
 	$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
-	include '../views/index.php';
+	return render('../views/index.php', ['blogPosts' => $blogPosts]);
 });
 //Se utiliza un dispatcher es el objeto que va a tomar la ruta que llega y llama el metodo que necesita.
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
