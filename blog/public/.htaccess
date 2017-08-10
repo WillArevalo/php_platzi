@@ -1,0 +1,8 @@
+#Este archivo sirve para hacer redireciones, redireciones de http a https entre otros.
+RewriteEngine On
+#Condicion de reescritura, se checkea si es un archivo que existe realmente
+RewriteCond %{REQUEST_FILENAME} !-f
+#No reescribir si es un directorio de verdad
+RewriteCond %{REQUEST_FILENAME} !-d
+#Regla de cualquier cosa que llegue despues de nuestra base se la enviaremos a index.php en el parametro route
+RewriteRule ^(.*)$ index.php?route=$1

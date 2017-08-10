@@ -1,10 +1,3 @@
-<?php 
-//Ordenado por id descendente osea el mas reciente primero
-$query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-$query->execute();
-//fetchAll recupera todos los posts
-$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,28 +28,13 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-9">
-				<h2>Posts</h2>
-				<a href="insert-post.php" class="btn btn-primary btn-lg">New Post</a>
-				<table class="table-responsive table-striped table-hover col-sm-12 col-md-12">
-					<thead>
-						<tr>
-							<th>Title</th>
-							<th>Edit</th>
-							<th>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach($blogPosts as $blogPost): ?>
-							<tr>
-								<td><?= $blogPost['title'] ?></td>
-								<td>Edit</td>
-								<td>Delete</td>
-							</tr>
-						<?php endforeach ?>
-					</tbody>
-				</table>				
+				<h3 class="text-primary">Admin Panel</h3>
+				<ul>
+				<!--Agrego la url por php-->
+					<li><a href="<?php echo BASE_URL; ?>admin/posts" class="text-muted">Manage Posts</a></li>
+				</ul>		
 			</div>
-			<nav class="hidden-xs hidden-sm col-md-3">
+			<nav class="hidden-xs hidden-sm col-sm-3">
 		      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
 		        <li><a href="#section1">Section 1 <br><small>Small text</small>	</a></li>
 		        <li><a href="#section2">Section 2 <br><small>Small text</small></a></li>
@@ -64,15 +42,11 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
 		      </ul>
 		    </nav>
 		</div>
-		<br>
-		<br>	
 		<div class="row">
 			<div class="col-md-12">
 				<footer>
 					This is a footer <br>
-					<div class="col-xs-4 col-xs-push-8 col-sm-2 col-sm-push-10 col-md-2 col-md-push-10">
-						<a class="text-muted small" href="./index.php">Admin Panel</a>
-					</div>
+					<a class="text-muted" href="../index.php">Blog</a>
 				</footer>			
 			</div>
 		</div>

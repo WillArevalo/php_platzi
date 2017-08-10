@@ -40,6 +40,37 @@ function render($fileName, $params = []){
 use Phroute\Phroute\RouteCollector;
 
 $router = new RouteCollector();
+//Si la pagina que rotuearemos no tiene nada de php no paso segundo parametro no hace falta porque es una pagina estatica
+$router->get('/admin', function(){
+	return render('../views/admin/index.php');
+});
+
+
+//Agrego route a admin posts
+$router->get('/admin/posts', function() use($pdo) {
+	$query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
+	$query->execute();
+	$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	return render('../views/admin/posts.php', ['blogPosts' => $blogPosts]);
+});
+
+//Agrego route a admin posts create
+$router->get('/admin/posts/create', function() {
+	return render('../views/admin/insert-post.php');
+});
+$router->post('/admin/posts/create', function() use($pdo) {
+
+	$sql = 'INSERT INTO blog_posts (title, content) VALUES(:title, :content)';
+	$query = $pdo->prepare($sql);
+	$result = $query->execute([
+		'title' => $_POST['title'],
+		'content' => $_POST['content']
+	]);
+
+	return render('../views/admin/insert-post.php', ['result' => $result]);
+});
+
 //Agrego el tipo de request que recibo(get) para la base de la aplicacion y una funcion anonima que ayda a responder
 $router->get('/', function() use($pdo){
 	//Ordenado por id descendente osea el mas reciente primero
