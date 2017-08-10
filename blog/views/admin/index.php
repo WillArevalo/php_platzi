@@ -11,10 +11,17 @@
 	<style>
 		body{
 			background-color: #f0f0f0;
+			background-image: url("../../public/images/plans.jpeg");
+			background-size: cover;
 			font-family: 'Montserrat', sans-serif;
+			margin-top: 5vh;
 		}
 		img{
 			border-radius: 10px 0px;
+		}
+		.container{
+			background: rgba(0,0,0,0.1);
+			height: 90vh;
 		}
 	</style>
 </head>
@@ -28,15 +35,15 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-9">
-				<h3 class="text-primary">Admin Panel</h3>
+				<h3>Admin Panel</h3>
 				<ul>
 				<!--Agrego la url por php-->
-					<li><a href="<?php echo BASE_URL; ?>admin/posts" class="text-muted">Manage Posts</a></li>
+					<li><a href="<?php echo BASE_URL; ?>admin/posts" class="text-important">Manage Posts</a></li>
 				</ul>		
 			</div>
 			<nav class="hidden-xs hidden-sm col-sm-3">
 		      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
-		        <li><a href="#section1">Section 1 <br><small>Small text</small>	</a></li>
+		        <li><a href="#section1">Section 1 <br><small>Small text</small></a></li>
 		        <li><a href="#section2">Section 2 <br><small>Small text</small></a></li>
 		        <li><a href="#section3">Section 3 <br><small>Small text</small></a></li>
 		      </ul>
@@ -46,7 +53,7 @@
 			<div class="col-md-12">
 				<footer>
 					This is a footer <br>
-					<a class="text-muted" href="../index.php">Blog</a>
+					<a class="text-muted" href="<?php echo BASE_URL; ?>">Blog</a>
 				</footer>			
 			</div>
 		</div>

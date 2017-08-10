@@ -67,7 +67,7 @@
 				<footer>
 					This is a footer <br>
 					<div class="col-xs-4 col-xs-push-8 col-sm-2 col-sm-push-10 col-md-2 col-md-push-10">
-						<a class="text-muted small" href="./index.php">Admin Panel</a>
+						<a class="text-muted small" href="<?php echo BASE_URL; ?>admin/">Admin Panel</a>
 					</div>
 				</footer>			
 			</div>
