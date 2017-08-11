@@ -1,0 +1,27 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+	<div class="col-xs-10 col-sm-10 col-md-11">
+		<h2>New Post</h2>
+	</div>
+	<div class="col-xs-2 col-sm-2 col-md-1">
+		<a href="{{ 'admin/posts' | url }}" class="btn btn-default btn-xs">Back</a>
+	</div>
+	<br><!--Si existe result y result es true-->
+	{% if result %}
+		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">Post Saved!</div>';
+	{% endif %}
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<form method="post">
+		<div class="form-group">
+	      <label for="inputTitle">Title:</label>
+	      <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Someone awesome title" name="email">
+	    </div>
+	    <div class="form-group">
+	      <label for="inputContent">Content:</label>
+	      <textarea name="content" id="inputContent" rows="5" class="form-control" placeholder="Your awesome article here!"></textarea>
+	    </div>
+	    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+		</form>	
+	</div>
+{% endblock %}

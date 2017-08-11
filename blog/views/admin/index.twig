@@ -1,0 +1,28 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+	<head>
+		<style>
+			body{
+				background-color: #f0f0f0;
+				background-image: url("../public/images/plans.jpeg");
+				background-size: cover;
+				font-family: 'Montserrat', sans-serif;
+				margin-top: 5vh;
+			}
+			img{
+				border-radius: 10px 0px;
+			}
+			.container{
+				background: rgba(0,0,0,0.1);
+				height: 90vh;
+				border-radius: 10px;
+			}
+		</style>
+	</head>
+	<h3>Admin Panel</h3>
+	<ul>
+	<!--Agrego la url por php-->
+		<li><a href="{{ 'admin/posts' | url }}" class="text-important">Manage Posts</a></li>
+	</ul>
+{% endblock %}

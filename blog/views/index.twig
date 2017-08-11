@@ -1,0 +1,21 @@
+{% extends "layout.twig" %}
+{% block content %}
+	{% for blogPost in blogPosts %}
+		<div class="blog-post">
+			<!--Este template va a heredar de otro template-->
+			<h2><!--Para imprimir un valor con twig se utiliza doble corchete-->
+				{{blogPost.title}}
+			</h2>
+			<p>
+				Jan 1, 2016 by <a href="#">Will</a>
+			</p>
+			<div class="blog-post-image">
+				<img src="./images/summer.jpeg" alt="" class="img-responsive">
+			</div>
+			<br>
+			<div class="blog-post-content article">
+				{{blogPost.content}}
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %} 
