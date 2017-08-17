@@ -8,8 +8,6 @@ error_reporting(E_ALL);
 //Agrego el modulo de autoloading de composer
 require_once '../vendor/autoload.php';
 
-//Lo he retirado de los demas index, y lo he puesto aqui.
-include_once "../config.php";
 
 //obtener el directorio base con esto...
 $baseUrl = '';
@@ -26,16 +24,27 @@ define('BASE_URL', $baseUrl);//define(define una constante)Atrubutos(nombre, con
 //Para poder llamar las paginas pendientes
 //traza una ruta(route) 
 //con un get si existe y si no se asume que estamos en la base de la aplicacion
+
+//Inicializo el ORM y cambio valores de default
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => 'cursophp',
+    'username'  => 'root',
+    'password'  => '',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
 $route = $_GET['route'] ?? '/';
-
-function render($fileName, $params = []){
-	ob_start(); //omite cualquier salida que tenga, y la guarda internamente
-	extract($params);//toma un arreglo asociativo y los convierte en string osea como [hola, k, ase] = hola k ase
-	include $fileName;
-
-	return ob_get_clean(); //Regresa todo lo hecho en la funcion.
-}
-
 
 use Phroute\Phroute\RouteCollector;
 
