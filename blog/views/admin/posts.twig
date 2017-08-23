@@ -1,25 +1,50 @@
 {% extends 'layout.twig' %}
 {% block content %}
+	<head>
+		<style>
+			body{
+				background-color: #f0f0f0;
+				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-size: cover;
+				font-family: 'Montserrat', sans-serif;
+				margin-top: 5vh;
+			}
+			img{
+				border-radius: 10px 0px;
+			}
+			.container{
+				background: rgba(0,0,0,0.1);
+				height: 90vh;
+				border-radius: 10px;
+			}
+			.containertable{
+				max-height: 300px;
+				overflow-y: auto;
+			}
+		</style>
+	</head>
 	<h2>Posts</h2>
 	<a href="{{'admin/posts/create' | url }}" class="btn btn-primary btn-lg">New Post</a>
 	<br/>
 	<br/>
-	<table class="table-responsive table-striped table-hover col-sm-12 col-md-12">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for blogPost in blogPosts %}
+	<div class="containertable">
+		<table class=" table table-responsive table-striped table-hover col-sm-12 col-md-12">
+			<thead>
 				<tr>
-					<td>{{blogPost.title}}</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<th>Title</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for blogPost in blogPosts %}
+					<tr>
+						<td>{{blogPost.title}}</td>
+						<td>Edit</td>
+						<td>Delete</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

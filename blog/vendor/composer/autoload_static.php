@@ -35,6 +35,7 @@ class ComposerStaticInitb8e1fac7bfe1587022a593e02ff73d66
         ),
         'D' => 
         array (
+            'Dotenv\\' => 7,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
         'C' => 
@@ -79,6 +80,10 @@ class ComposerStaticInitb8e1fac7bfe1587022a593e02ff73d66
         'Illuminate\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
         'Doctrine\\Common\\Inflector\\' => 
         array (

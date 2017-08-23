@@ -24,6 +24,10 @@ define('BASE_URL', $baseUrl);//define(define una constante)Atrubutos(nombre, con
 //Para poder llamar las paginas pendientes
 //traza una ruta(route) 
 //con un get si existe y si no se asume que estamos en la base de la aplicacion
+//Inicializo a dotenv variables de entorno __DIR__ retorna la direcciion del directorio en este caso public por eso me devuelvo una carpeta
+
+$dotenv = new \Dotenv\Dotenv(__DIR__ . '/..');
+$dotenv->load();
 
 //Inicializo el ORM y cambio valores de default
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -32,10 +36,10 @@ $capsule = new Capsule;
 
 $capsule->addConnection([
     'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'cursophp',
-    'username'  => 'root',
-    'password'  => '',
+    'host'      => getenv('DB_HOST'),
+    'database'  => getenv('DB_NAME'),
+    'username'  => getenv('DB_USER'),
+    'password'  => getenv('DB_PASS'),
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',

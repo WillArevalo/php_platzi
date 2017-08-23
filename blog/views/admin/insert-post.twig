@@ -1,6 +1,25 @@
 {% extends 'layout.twig' %}
 
 {% block content %}
+	<head>
+		<style>
+			body{
+				background-color: #f0f0f0;
+				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-size: cover;
+				font-family: 'Montserrat', sans-serif;
+				margin-top: 5vh;
+			}
+			img{
+				border-radius: 10px 0px;
+			}
+			.container{
+				background: rgba(0,0,0,0.1);
+				height: 90vh;
+				border-radius: 10px;
+			}
+		</style>
+	</head>
 	<div class="col-xs-10 col-sm-10 col-md-11">
 		<h2>New Post</h2>
 	</div>
