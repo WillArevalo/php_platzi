@@ -60,6 +60,8 @@ $router->controller('/admin', App\Controllers\Admin\IndexController::class);
 //Agrego route a admin posts
 $router->controller('/admin/posts', App\Controllers\Admin\PostController::class);
 
+$router->controller('/admin/users', App\Controllers\Admin\UserController::class);
+
 //Agrego el tipo de request que recibo(get) para la base de la aplicacion y una funcion anonima que ayda a responder
 //En vez de pasar un metodo get se le pasa el controller,
 //El segundo parametro retorna el nombre de la clase
