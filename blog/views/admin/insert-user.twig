@@ -21,10 +21,10 @@
 		</style>
 	</head>
 	<div class="col-xs-10 col-sm-10 col-md-11">
-		<h2>New Post</h2>
+		<h2>New User</h2>
 	</div>
 	<div class="col-xs-2 col-sm-2 col-md-1">
-		<a href="{{ 'admin/posts' | url }}" class="btn btn-default btn-xs">Back</a>
+		<a href="{{ 'admin/users' | url }}" class="btn btn-default btn-xs">Back</a>
 	</div>
 	<br>
 	{% if errors %}
@@ -40,17 +40,21 @@
 	{% endif %}
 	<!--Si existe result y result es true-->
 	{% if result %}
-		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">Post Saved!</div>';
+		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">User Saved!</div>';
 	{% endif %}
 	<div class="col-xs-12 col-sm-12 col-md-12">
 		<form method="post">
 		<div class="form-group">
-	      <label for="inputTitle">Title:</label>
-	      <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Some awesome title" name="email">
+	      <label for="inputName">Name:</label>
+	      <input type="text" name="name" class="form-control" id="inputName" name="email">
 	    </div>
 	    <div class="form-group">
-	      <label for="inputContent">Content:</label>
-	      <textarea name="content" id="inputContent" rows="5" class="form-control" placeholder="Your awesome article here!"></textarea>
+	      <label for="inputEmail">Email:</label>
+	      <input type="text" name="email" class="form-control" id="inputEmail" placeholder="david@example.com" name="email">
+	    </div>
+	    <div class="form-group">
+	      <label for="inputPassword">Password:</label>
+	      <input type="password" name="password" class="form-control" id="inputPassword" name="password">
 	    </div>
 	    <button type="submit" class="btn btn-primary btn-lg">Save</button>
 		</form>	
