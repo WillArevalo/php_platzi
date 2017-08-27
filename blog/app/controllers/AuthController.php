@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Sirius\Validation\Validator;
 use App\Models\User;
+use App\Log;
 
 class AuthController extends BaseController{
 	public function getLogin() {	
@@ -25,6 +26,8 @@ class AuthController extends BaseController{
 				if(password_verify($_POST['password'], $user->password)){
 					//El usuario se autentifico con exito yla sesion se identifica con el id del usuario
 					$_SESSION['userId'] = $user->id;
+					//Log para que me mande info cuando el usuario logeea, puedo mandar lo que quiera.
+					Log::logInfo('Login userId: ' . $user->id );
 					//header redirije a la pagina de admin en este caso
 					header('Location:'. BASE_URL . 'admin');
 					return null;
@@ -40,6 +43,7 @@ class AuthController extends BaseController{
 			]);
 	}
 	public function getLogout(){
+		Log::logInfo('Logout userId: ' . $_SESSION['userId']);
 		//Eliminar la session(unset) como si se tratara de una variable y luego redirecciono
 		unset($_SESSION['userId']);
 		header('Location:' . BASE_URL . 'auth/login');
