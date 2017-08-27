@@ -28,15 +28,7 @@
 	</div>
 	<br>
 	{% if errors %}
-		<div class="alert alert-danger col-xs-12 col-sm-12 col-md-12">
-			<ul>
-				{% for input, messages in errors %}
-					{% for message in messages %}
-						<li>{{ input }}: {{ message }}</li>
-					{% endfor %}
-				{% endfor %}
-			</ul>
-		</div>
+		{% include('partials/errors.twig') %}
 	{% endif %}
 	<!--Si existe result y result es true-->
 	{% if result %}
@@ -46,15 +38,15 @@
 		<form method="post">
 		<div class="form-group">
 	      <label for="inputName">Name:</label>
-	      <input type="text" name="name" class="form-control" id="inputName" name="email">
+	      <input type="text" name="name" class="form-control" id="inputName">
 	    </div>
 	    <div class="form-group">
 	      <label for="inputEmail">Email:</label>
-	      <input type="text" name="email" class="form-control" id="inputEmail" placeholder="david@example.com" name="email">
+	      <input type="text" name="email" class="form-control" id="inputEmail" placeholder="david@example.com">
 	    </div>
 	    <div class="form-group">
 	      <label for="inputPassword">Password:</label>
-	      <input type="password" name="password" class="form-control" id="inputPassword" name="password">
+	      <input type="password" name="password" class="form-control" id="inputPassword">
 	    </div>
 	    <button type="submit" class="btn btn-primary btn-lg">Save</button>
 		</form>	

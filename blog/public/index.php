@@ -8,6 +8,8 @@ error_reporting(E_ALL);
 //Agrego el modulo de autoloading de composer
 require_once '../vendor/autoload.php';
 
+//Se inicializa en toda la aplicacion
+session_start();
 
 //obtener el directorio base con esto...
 $baseUrl = '';
@@ -53,6 +55,9 @@ $route = $_GET['route'] ?? '/';
 use Phroute\Phroute\RouteCollector;
 
 $router = new RouteCollector();
+
+$router->controller('/auth', App\Controllers\AuthController::class);
+
 //Si la pagina que rotuearemos no tiene nada de php no paso segundo parametro no hace falta porque es una pagina estatica
 $router->controller('/admin', App\Controllers\Admin\IndexController::class);
 
