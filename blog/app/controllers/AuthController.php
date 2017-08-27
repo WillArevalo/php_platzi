@@ -39,6 +39,11 @@ class AuthController extends BaseController{
 				'errors' => $errors
 			]);
 	}
+	public function getLogout(){
+		//Eliminar la session(unset) como si se tratara de una variable y luego redirecciono
+		unset($_SESSION['userId']);
+		header('Location:' . BASE_URL . 'auth/login');
+	}
 }
 
 ?>

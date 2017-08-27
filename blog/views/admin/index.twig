@@ -21,9 +21,11 @@
 		</style>
 	</head>
 	<h3>Admin Panel</h3>
+	<h5><b>Welcome {{ user.name }}!</b></h5>
 	<ul>
 	<!--Agrego la url por php-->
 		<li><a href="{{ 'admin/posts' | url }}" class="text-important">Manage Posts</a></li>
 		<li><a href="{{ 'admin/users' | url }}" class="text-important">Manage Users</a></li>
+		<li><a href="{{ 'auth/logout' | url }}" class="text-important">Logout</a></li>
 	</ul>
 {% endblock %}
