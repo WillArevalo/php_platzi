@@ -56,16 +56,30 @@ use Phroute\Phroute\RouteCollector;
 
 $router = new RouteCollector();
 
+//Filtro con phroute
+$router->filter('auth', function(){
+	if (!isset($_SESSION['userId'])){
+		header('Location: ' . BASE_URL . 'auth/login');
+		return false;
+	}
+});
+
 $router->controller('/auth', App\Controllers\AuthController::class);
 
-//Si la pagina que rotuearemos no tiene nada de php no paso segundo parametro no hace falta porque es una pagina estatica
-$router->controller('/admin', App\Controllers\Admin\IndexController::class);
+//Grupo del filtro antes de que rutee haga un auth
+$router->group(['before' => 'auth'], function($router){
+	//Si la pagina que rotuearemos no tiene nada de php no paso segundo parametro no hace falta porque es una pagina estatica
+	$router->controller('/admin', App\Controllers\Admin\IndexController::class);
 
 
-//Agrego route a admin posts
-$router->controller('/admin/posts', App\Controllers\Admin\PostController::class);
+	//Agrego route a admin posts
+	$router->controller('/admin/posts', App\Controllers\Admin\PostController::class);
 
-$router->controller('/admin/users', App\Controllers\Admin\UserController::class);
+	$router->controller('/admin/users', App\Controllers\Admin\UserController::class);
+});
+
+
+
 
 //Agrego el tipo de request que recibo(get) para la base de la aplicacion y una funcion anonima que ayda a responder
 //En vez de pasar un metodo get se le pasa el controller,
