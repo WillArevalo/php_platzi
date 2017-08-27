@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class BlogPost extends Model {
 	protected $table = 'blog_posts';
 	//Filable es el metodo que no deja que se inserten mas valores de los que se le pasa realmente
-	protected $fillable = ['title', 'content', 'updated_at'];
+	protected $fillable = ['title', 'content', 'updated_at', 'img_url'];
 }
 
 ?>

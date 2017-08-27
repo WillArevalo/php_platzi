@@ -32,6 +32,11 @@ class PostController extends BaseController{
 				'title' => $_POST['title'],
 				'content' => $_POST['content']
 			]);
+			//Agrega la url de la imagen antes de guardarla en la db
+			if ($_POST['img']) {
+				$blogPost->img_url = $_POST['img'];
+			}
+
 			$blogPost->save();
 			$result = true;
 			

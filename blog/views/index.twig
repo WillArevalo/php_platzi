@@ -9,9 +9,11 @@
 			<p>
 				{{blogPost.updated_at}} by <a href="#">Will</a>
 			</p>
-			<div class="blog-post-image">
-				<img src="./images/summer.jpeg" alt="" class="img-responsive">
-			</div>
+			{% if blogPost.img_url %}
+				<div class="blog-post-image">
+					<img src="{{ blogPost.img_url }}" alt="" class="img-responsive">
+				</div>
+			{% endif %}
 			<br>
 			<div class="blog-post-content article">
 				{{blogPost.content}}
