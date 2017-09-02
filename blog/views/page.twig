@@ -1,0 +1,20 @@
+{% extends "layout.twig" %}
+{% block content %}
+	<div class="blog-post">
+		<h2>
+			{{blogPost.title | replace({'-': " "})}}
+		</h2>
+		<p>
+			{{blogPost.updated_at}} by <a href="#">Will</a>
+		</p>
+		{% if blogPost.img_url %}
+			<div class="blog-post-image">
+				<img src="{{ blogPost.img_url }}" alt="" class="img-responsive">
+			</div>
+		{% endif %}
+		<br>
+		<div class="blog-post-content article">
+			{{blogPost.content}}
+		</div>
+	</div>
+{% endblock %} 

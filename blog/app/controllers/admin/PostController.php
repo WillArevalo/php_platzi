@@ -8,7 +8,7 @@ use Sirius\Validation\Validator;
 class PostController extends BaseController{
 	public function getIndex(){
 		//El metoddo all toma todo el contenido
-		$blogPosts = BlogPost::all();
+		$blogPosts = BlogPost::query()->orderBy('id', 'desc')->get();
 
 		return $this->render('admin/posts.twig', ['blogPosts' => $blogPosts]);
 	}
@@ -29,7 +29,7 @@ class PostController extends BaseController{
 		if ($validator->validate($_POST)){
 			//Para crear un nuevo post con orm se le pasan los argumentos
 			$blogPost = new BlogPost([
-				'title' => $_POST['title'],
+				'title' => str_replace(" ","-",$_POST['title']),
 				'content' => $_POST['content']
 			]);
 			//Agrega la url de la imagen antes de guardarla en la db

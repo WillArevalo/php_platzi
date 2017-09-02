@@ -4,7 +4,10 @@
 		<div class="blog-post">
 			<!--Este template va a heredar de otro template-->
 			<h2><!--Para imprimir un valor con twig se utiliza doble corchete-->
-				{{blogPost.title}}
+				<a href="{{ ('post/' ~ blogPost.title) | url }}" class="text-success">
+					{{blogPost.title | replace({'-': " "})}}
+				</a>
+				{% set title = blogPost.title %}
 			</h2>
 			<p>
 				{{blogPost.updated_at}} by <a href="#">Will</a>

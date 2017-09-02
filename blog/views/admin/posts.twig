@@ -56,7 +56,14 @@
 			<tbody>
 				{% for blogPost in blogPosts %}
 					<tr>
-						<td>{{blogPost.title}}</td>
+
+						<td>
+							<b>
+								<a href="{{ ('post/' ~ blogPost.title) | url }}" class="text-success">
+								{{blogPost.title | replace({'-': " "})}}
+								</a>
+							</b>
+						</td>
 						<td>Edit</td>
 						<td>Delete</td>
 					</tr>
