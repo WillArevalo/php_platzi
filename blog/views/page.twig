@@ -13,8 +13,10 @@
 			</div>
 		{% endif %}
 		<br>
+		{% autoescape false %}
 		<div class="blog-post-content article">
 			{{blogPost.content}}
 		</div>
+		{% endautoescape %}
 	</div>
 {% endblock %} 

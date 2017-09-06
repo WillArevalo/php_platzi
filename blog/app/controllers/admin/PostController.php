@@ -24,13 +24,16 @@ class PostController extends BaseController{
 		$validator = new Validator();
 		//agregando reglas
 		$validator->add('title', 'required');
+		$validator->add('slug', 'required');
 		$validator->add('content', 'required');
+
 		//que es lo que vamos a validar
 		if ($validator->validate($_POST)){
 			//Para crear un nuevo post con orm se le pasan los argumentos
 			$blogPost = new BlogPost([
 				'title' => str_replace(" ","-",$_POST['title']),
-				'content' => $_POST['content']
+				'content' => $_POST['content'],
+				'slug' => $_POST['slug']
 			]);
 			//Agrega la url de la imagen antes de guardarla en la db
 			if ($_POST['img']) {
