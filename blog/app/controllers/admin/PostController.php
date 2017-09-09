@@ -12,7 +12,17 @@ class PostController extends BaseController{
 
 		return $this->render('admin/posts.twig', ['blogPosts' => $blogPosts]);
 	}
+	public function getDelete($title){
 
+		$result = false;
+		$deletPost = BlogPost::where('title', $title)->delete();
+		$result = true;
+		header('Location:' . BASE_URL . 'admin/posts' );
+		return $this->render('admin/posts.twig', [
+			'result' => $result
+			]);
+
+	}
 	public function getCreate(){
 		//get de admin/posts/create
 		return $this->render('admin/insert-post.twig');
@@ -53,6 +63,7 @@ class PostController extends BaseController{
 			'errors' => $errors
 			]);
 	}
+
 
 }
 

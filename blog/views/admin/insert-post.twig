@@ -5,7 +5,7 @@
 		<style>
 			body{
 				background-color: #f0f0f0;
-				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-image: url("{{ 'images/background.png' | url }}");
 				background-size: cover;
 				font-family: 'Montserrat', sans-serif;
 				margin-top: 5vh;
@@ -14,19 +14,20 @@
 				border-radius: 10px 0px;
 			}
 			.container{
-				background: rgba(0,0,0,0.5);
+				background: rgba(0,0,0,0.1);
 				height: 90vh;
 				border-radius: 10px;
+				border: 1px solid gray;
 			}
 		</style>
 		<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
   		<script>tinymce.init({ selector:'#inputContent' });</script>
 	</head>
 	<div class="col-xs-10 col-sm-10 col-md-11">
-		<h2>New Post</h2>
+		<h2 class="text-warning">New Post</h2>
 	</div>
 	<div class="col-xs-2 col-sm-2 col-md-1">
-		<a href="{{ 'admin/posts' | url }}" class="btn btn-default btn-xs">Back</a>
+		<a href="{{ 'admin/posts' | url }}" class="btn btn-default  btn-xs">Back</a>
 	</div>
 	<br>
 	{% if errors %}
@@ -39,21 +40,21 @@
 	<div class="col-xs-12 col-sm-12 col-md-3">
 		<form method="post">
 		<div class="form-group">
-	      <label for="inputTitle" class="text-muted">Title:</label>
+	      <label for="inputTitle" class="text-warning">Title:</label>
 	      <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Some awesome title">
 	    </div>
 	    <div class="form-group">
-	      <label for="inputImg" class="text-muted">URL Image:</label>
+	      <label for="inputImg" class="text-warning">URL Image:</label>
 	      <input type="text" name="img" class="form-control" id="inputImg" placeholder="https://imgcool.com/imgexample.jpeg">
 	    </div>
 	    <div class="form-group">
-	      <label for="inputSlug" class="text-muted">Description:</label>
+	      <label for="inputSlug" class="text-warning">Description:</label>
 	      <textarea name="slug" id="inputSlug" rows="8" class="form-control" placeholder="300 characters MAX..."></textarea>
 	    </div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-9">
 	    <div class="form-group">
-	      <label for="inputContent" class="text-muted">Content:</label>
+	      <label for="inputContent" class="text-warning">Content:</label>
 	      <textarea name="content" id="inputContent" rows="10" class="form-control">Your awesome article here!</textarea>
 	    </div>
 	</div>

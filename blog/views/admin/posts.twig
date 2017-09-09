@@ -4,7 +4,7 @@
 		<style>
 			body{
 				background-color: #f0f0f0;
-				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-image: url("{{ 'images/background.png' | url }}");
 				background-size: cover;
 				font-family: 'Montserrat', sans-serif;
 				margin-top: 5vh;
@@ -13,9 +13,10 @@
 				border-radius: 10px 0px;
 			}
 			.container{
-				background: rgba(0,0,0,0.3);
+				background: rgba(0,0,0,0.1);
 				height: 90vh;
 				border-radius: 10px;
+				border: 1px solid gray;
 			}
 			.containertable{
 				max-height: 300px;
@@ -40,7 +41,14 @@
 			}
 		</style>
 	</head>
-	<h2>Posts</h2>
+	<h2 class="text-muted">Posts</h2>
+	{% if errors %}
+		{% include('partials/errors.twig') %}
+	{% endif %}
+	<!--Si existe result y result es true-->
+	{% if result %}
+		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">Post Deleted!</div>';
+	{% endif %}
 	<a href="{{'admin/posts/create' | url }}" class="btn btn-primary btn-lg">New Post</a>
 	<br/>
 	<br/>
@@ -48,9 +56,9 @@
 		<table class=" table table-responsive table-striped table-hover col-sm-12 col-md-12">
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Edit</th>
-					<th>Delete</th>
+					<th class="text-muted">Title</th>
+					<th class="text-muted">Edit</th>
+					<th class="text-muted">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,14 +67,19 @@
 
 						<td>
 							<b>
-								<a href="{{ ('post/' ~ blogPost.title) | url }}" class="text-success">
+								<a href="{{ ('post/' ~ blogPost.title) | url }}" class="text-primary">
 								{{blogPost.title | replace({'-': " "})}}
 								</a>
 							</b>
 						</td>
-						<td class="text-primary"><span class="glyphicon glyphicon-pencil"></td>
-						<td class="text-danger"><span class="glyphicon glyphicon-trash"></td>
+						<td class="text-primary"><a class="btn btn-success" href="{{('admin/posts/edit/' ~ blogPost.title ) | url }}"><span class="glyphicon glyphicon-pencil"></a></td>
+						<td class="text-danger"> <button class="btn btn-danger btn-popover"><span class="glyphicon glyphicon-trash"></button></td>
 					</tr>
+					<script>
+						$(document).ready(function(){
+						    $('.btn-popover').popover({title: "¿Desea eliminar el post?", content: "<div class='btn-group'><a href='{{('admin/posts/delete/' ~ blogPost.title ) | url }}' class='btn btn-danger'>Eliminar</a><a href='{{'admin/posts' | url }}' class='btn btn-primary'>Cancelar</a></div>", html: true, placement: "left"}); 
+						});
+					</script>
 				{% endfor %}
 			</tbody>
 		</table>

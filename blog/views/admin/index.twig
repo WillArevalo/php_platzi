@@ -5,7 +5,7 @@
 		<style>
 			body{
 				background-color: #f0f0f0;
-				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-image: url("{{ 'images/background.png' | url }}");
 				background-size: cover;
 				font-family: 'Montserrat', sans-serif;
 				margin-top: 5vh;
@@ -17,15 +17,17 @@
 				background: rgba(0,0,0,0.1);
 				height: 90vh;
 				border-radius: 10px;
+				border: 1px solid gray;
 			}
 		</style>
 	</head>
-	<h3>Admin Panel</h3>
-	<h5><b>Welcome {{ user.name }}!</b></h5>
-	<ul>
-	<!--Agrego la url por php-->
-		<li><a href="{{ 'admin/posts' | url }}" class="text-important">Manage Posts</a></li>
-		<li><a href="{{ 'admin/users' | url }}" class="text-important">Manage Users</a></li>
-		<li><a href="{{ 'auth/logout' | url }}" class="text-important">Logout</a></li>
-	</ul>
+	<h3 class="text-muted">Admin Panel</h3>
+	<h4 class="text-muted"><b>Welcome {{ user.name }}!</b></h4>
+	<br>
+	<br>
+	<div class="btn-group-vertical col-lg-5">
+		<a href="{{ 'admin/posts' | url }}" class="btn btn-lg btn-block btn-primary text-important">Manage Posts</a>
+		<a href="{{ 'admin/users' | url }}" class="btn btn-lg btn-block btn-warning text-important">Manage Users</a>
+		<a href="{{ 'auth/logout' | url }}" class="btn btn-lg btn-block btn-danger text-important">Logout</a>
+	</div>
 {% endblock %}
