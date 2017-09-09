@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 {% block content %}
-	{% for blogPost in blogPosts %}
+	{% for blogPost in itemsList %}
 		<div class="blog-post">
 			<!--Este template va a heredar de otro template-->
 			<h2><!--Para imprimir un valor con twig se utiliza doble corchete-->
@@ -23,4 +23,27 @@
 			</div>
 		</div>
 	{% endfor %}
+	<div class="text-center">
+		<nav aria-label="Page navigation">
+		  <ul class="pagination pagination-lg">
+		    <li>
+		      <a href="{{ pag - 1 }}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			{% for i in range(1, totalPages) %}
+				{% if i == pag %}
+					<li class="active"><a href="{{i}}">{{i}}</a></li>
+				{% else %}
+				  	<li><a href="{{i}}">{{i}}</a></li>
+				{% endif %}
+			{% endfor %}
+		    <li>
+		      <a href="{{ pag + 1 }}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
 {% endblock %} 

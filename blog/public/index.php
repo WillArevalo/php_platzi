@@ -79,12 +79,6 @@ $router->group(['before' => 'auth'], function($router){
 	$router->controller('/admin/users', App\Controllers\Admin\UserController::class);
 });
 $router->controller('/post', App\Controllers\PageController::class);
-//use App\Models\BlogPost;
-//use App\Controllers\BaseController;
-//$router->get(['/post/{title}', 'titlePost'], function($titlePost){
-//	$blogpost = BlogPost::where('title', $titlePost)->first();
-//    return BaseController->render('post/page.twig', ['blogPost' => $blogPost]);
-//});
 
 //Agrego el tipo de request que recibo(get) para la base de la aplicacion y una funcion anonima que ayda a responder
 //En vez de pasar un metodo get se le pasa el controller,
