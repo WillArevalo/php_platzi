@@ -1,4 +1,19 @@
 <?php 
+
+/*
+TABLE blog_posts
+
+id 			int(11)			auto_increment	|
+title 		text 							|
+content 	longtext 						|
+img_url		varchar(150) 					|
+slug 		varchar(300) 					| Not Null
+created_at	datetime 						|
+updated_at	datetime 						|
+
+*/
+
+
 //nueva clase que representa especificamente un blogpost de nuestra base de datos
 namespace App\Models;
 

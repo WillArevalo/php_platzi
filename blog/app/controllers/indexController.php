@@ -15,14 +15,14 @@ class IndexController extends BaseController{
 		$this->pag = $pag;
 		$blogPosts = BlogPost::query()->orderBy('id', 'desc')->get();
 
-        $limit = 5; // leaderboard rows limit
+        $limit = 5; // limit
         $offset = ($pag - 1) * $limit; // offset
         $totalItems = count($blogPosts); // total items
-        $totalPages = ceil($totalItems / $limit);
-        if (($pag <= $totalPages) && ($pag >= 1)) {
+        $totalPages = ceil($totalItems / $limit); //total pages
+        if (($pag <= $totalPages) && ($pag >= 1)) {  //condition for pagination not overflow
         	$itemsList = array_slice($blogPosts->toArray(), $offset, $limit);
 		}
-		else{
+		else{ //redirect to first page
 			echo "Bad direction";
 			header('Location:' . BASE_URL );
 		}
