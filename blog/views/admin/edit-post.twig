@@ -21,10 +21,20 @@
 			}
 		</style>
 		<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-  		<script>tinymce.init({ selector:'#inputContent' });</script>
+  		<script>
+  			tinymce.init({ selector:'#inputContent', theme: 'modern',
+			  plugins: [
+			    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+			    'searchreplace wordcount visualblocks visualchars code fullscreen',
+			    'insertdatetime media nonbreaking save table contextmenu directionality',
+			    'template paste textcolor colorpicker textpattern imagetools codesample toc help emoticons hr'
+			  ],
+			  toolbar1: 'formatselect | bold italic  strikethrough  forecolor backcolor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link image media | preview fullscreen'
+			});
+  		</script>
 	</head>
 	<div class="col-xs-10 col-sm-10 col-md-11">
-		<h2 class="text-warning">Edit Post | {{editPost.title}}</h2>
+		<h2 class="text-warning">Edit Post | {{editPost.title | replace({'-': " "})}}</h2>
 	</div>
 	<div class="col-xs-2 col-sm-2 col-md-1">
 		<a href="{{ 'admin/posts' | url }}" class="btn btn-default  btn-xs">Back</a>
@@ -38,7 +48,7 @@
 		<form method="post">
 		<div class="form-group">
 	      <label for="inputTitle" class="text-warning">Title:</label>
-	      <input type="text" name="title" class="form-control" id="inputTitle" value="{{editPost.title}}">
+	      <input type="text" name="title" class="form-control" id="inputTitle" value="{{editPost.title | replace({'-': " "})}}">
 	    </div>
 	    <div class="form-group">
 	      <label for="inputImg" class="text-warning">URL Image:</label>
@@ -46,7 +56,7 @@
 	    </div>
 	    <div class="form-group">
 	      <label for="inputSlug" class="text-warning">Description:</label>
-	      <textarea name="slug" id="inputSlug" rows="8" class="form-control">{{editPost.slug}}</textarea>
+	      <textarea name="slug" id="inputSlug" rows="10" class="form-control">{{editPost.slug}}</textarea>
 	    </div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-9">
