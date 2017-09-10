@@ -17,6 +17,17 @@ class UserController extends BaseController{
 	public function getCreate(){
 		return $this->render('admin/insert-user.twig');
 	}
+	public function getDelete($name){
+
+		$result = false;
+		$deletUser = User::where('name', $name)->delete();
+		header('Location:' . BASE_URL . 'admin/users' );
+		$result = true;
+		return $this->render('admin/users.twig', [
+			'result' => $result
+			]);
+
+	}
 
 	public function postCreate(){
 		$errors = [];
@@ -30,7 +41,7 @@ class UserController extends BaseController{
 
 		if($validator->validate($_POST)){
 			$user = new User();
-			$user->name = $_POST['name'];
+			$user->name = str_replace(" ","-",$_POST['name']);
 			$user->email = $_POST['email'];
 			//Funcionalidad de php para hashear contraseñas
 			$user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);

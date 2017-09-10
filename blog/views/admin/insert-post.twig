@@ -38,9 +38,9 @@
 		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">Post Saved!</div>';
 	{% endif %}
 	<div class="col-xs-12 col-sm-12 col-md-3">
-		<form method="post">
+		<form method="post" onsubmit="return validateForm()">
 		<div class="form-group">
-	      <label for="inputTitle" class="text-warning">Title:</label>
+	      <label for="inputTitle" class="text-warning">*Title:</label>
 	      <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Some awesome title">
 	    </div>
 	    <div class="form-group">
@@ -48,13 +48,13 @@
 	      <input type="text" name="img" class="form-control" id="inputImg" placeholder="https://imgcool.com/imgexample.jpeg">
 	    </div>
 	    <div class="form-group">
-	      <label for="inputSlug" class="text-warning">Description:</label>
+	      <label for="inputSlug" class="text-warning">*Description:</label>
 	      <textarea name="slug" id="inputSlug" rows="8" class="form-control" placeholder="300 characters MAX..."></textarea>
 	    </div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-9">
 	    <div class="form-group">
-	      <label for="inputContent" class="text-warning">Content:</label>
+	      <label for="inputContent" class="text-warning">*Content:</label>
 	      <textarea name="content" id="inputContent" rows="10" class="form-control">Your awesome article here!</textarea>
 	    </div>
 	</div>
@@ -62,4 +62,30 @@
 		<button type="submit" class="btn btn-primary btn-lg">Save</button>
 		</form>
 	</div>
+{% endblock %}
+{% block js %}
+	<script type="text/javascript">
+		//trim es para quitar espacios en al comienzo y al final
+		function validateForm(){
+			var title = document.getElementById('inputTitle').value.trim();
+			var slug = document.getElementById('inputSlug').value.trim();
+			var content = document.getElementById('inputContent').value.trim();
+			if(title === '' || slug === '' || content === ''){
+				swal({
+				  title: '¡Error!',
+				  text: 'All inputs with * are required.',
+				  timer: 3000
+				}).then(
+				  function () {},
+				  // handling the promise rejection
+				  function (dismiss) {
+				    if (dismiss === 'timer') {
+				      console.log('I was closed by the timer')
+				    }
+				  }
+				)
+			}
+			return false;
+		}
+	</script>
 {% endblock %}

@@ -5,7 +5,7 @@
 		<style>
 			body{
 				background-color: #f0f0f0;
-				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-image: url("{{ 'images/background.png' | url }}");
 				background-size: cover;
 				font-family: 'Montserrat', sans-serif;
 				margin-top: 5vh;
@@ -17,11 +17,12 @@
 				background: rgba(0,0,0,0.1);
 				height: 90vh;
 				border-radius: 10px;
+				border:1px solid gray;
 			}
 		</style>
 	</head>
 	<div class="col-xs-10 col-sm-10 col-md-11">
-		<h2>New User</h2>
+		<h2 class="text-muted">New User</h2>
 	</div>
 	<div class="col-xs-2 col-sm-2 col-md-1">
 		<a href="{{ 'admin/users' | url }}" class="btn btn-default btn-xs">Back</a>
@@ -35,20 +36,45 @@
 		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">User Saved!</div>';
 	{% endif %}
 	<div class="col-xs-12 col-sm-12 col-md-12">
-		<form method="post">
+		<form method="post" onsubmit="return validateForm()">
 		<div class="form-group">
-	      <label for="inputName">Name:</label>
+	      <label for="inputName" class="text-muted">*Name:</label>
 	      <input type="text" name="name" class="form-control" id="inputName">
 	    </div>
 	    <div class="form-group">
-	      <label for="inputEmail">Email:</label>
+	      <label for="inputEmail" class="text-muted">*Email:</label>
 	      <input type="text" name="email" class="form-control" id="inputEmail" placeholder="david@example.com">
 	    </div>
 	    <div class="form-group">
-	      <label for="inputPassword">Password:</label>
+	      <label for="inputPassword" class="text-muted">*Password:</label>
 	      <input type="password" name="password" class="form-control" id="inputPassword">
 	    </div>
 	    <button type="submit" class="btn btn-primary btn-lg">Save</button>
 		</form>	
 	</div>
+{% endblock %}
+{% block js %}
+	<script type="text/javascript">
+		function validateForm(){
+			var name = document.getElementById('inputName').value.trim();
+			var email = document.getElementById('inputEmail').value.trim();
+			var password = document.getElementById('inputPassword').value.trim();
+			if(name === '' || email === '' || password === ''){
+				swal({
+				  title: '¡Error!',
+				  text: 'All inputs with * are required.',
+				  timer: 3000
+				}).then(
+				  function () {},
+				  // handling the promise rejection
+				  function (dismiss) {
+				    if (dismiss === 'timer') {
+				      console.log('I was closed by the timer')
+				    }
+				  }
+				)
+			}
+			return false;
+		}
+	</script>
 {% endblock %}

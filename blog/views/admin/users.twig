@@ -6,7 +6,7 @@
 		<style>
 			body{
 				background-color: #f0f0f0;
-				background-image: url("{{ 'images/plans.jpeg' | url }}");
+				background-image: url("{{ 'images/background.png' | url }}");
 				background-size: cover;
 				font-family: 'Montserrat', sans-serif;
 				margin-top: 5vh;
@@ -18,6 +18,7 @@
 				background: rgba(0,0,0,0.1);
 				height: 90vh;
 				border-radius: 10px;
+				border: 1px solid gray;
 			}
 			.containertable{
 				max-height: 300px;
@@ -25,7 +26,10 @@
 			}
 		</style>
 	</head>
-	<h2>Users</h2>
+	<h2 class="text-muted">Users</h2>
+	{% if result %}
+		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">User Deleted!</div>';
+	{% endif %}
 	<a href="{{'admin/users/create' | url }}" class="btn btn-primary btn-lg">New User</a>
 	<br/>
 	<br/>
@@ -33,23 +37,61 @@
 		<table class=" table table-responsive table-striped table-hover col-sm-12 col-md-12">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Edit</th>
-					<th>Delete</th>
+					<th class="text-success">Name</th>
+					<th class="text-success">Email</th>
+					<th class="text-success">Delete</th>
 				</tr>
 			</thead>
+			{% set urlfinalito = 'admin/users/delete/' | url  %}
 			<tbody>
 				{% for user in users %}
 					<tr>
-						<td>{{user.name}}</td>
-						<td>{{user.email}}</td>
-						<td>Edit</td>
-						<td>Delete</td>
+						<td class="text-muted">{{user.name | replace({'-': " "})}}</td>
+						<td class="text-muted">{{user.email}}</td>
+						<td class="text-danger"> <a onclick="deletUser('{{user.name}}','{{urlfinalito}}')" class="btn btn-danger btn-popover"><span class="glyphicon glyphicon-trash"></a></td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
 
+{% endblock %}
+{% block js %}
+	<script>
+		function deletUser(word, first){
+			swal({
+			  title: 'Are you sure?',
+			  text: "You won't be able to revert this!",
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!',
+			  cancelButtonText: 'No, cancel!',
+			  confirmButtonClass: 'btn btn-success',
+			  cancelButtonClass: 'btn btn-danger',
+			  buttonsStyling: false
+			}).then(function () {
+			  swal(
+			    'Deleted!',
+			    'Your file has been deleted.',
+			    'success'
+			  )
+			  	var title; title = word;
+			  	var helper; helper = first; 
+				var urlfinal; urlfinal = helper + title;
+			  	window.location.href = urlfinal;
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  if (dismiss === 'cancel') {
+			    swal(
+			      'Cancelled',
+			      'Your user is safe :)',
+			      'error'
+			    )
+			  }
+			})
+		}
+	</script>
 {% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+	<head>
+		<style>
+			body{
+				background-color: #f0f0f0;
+				background-image: url("{{ 'images/background.png' | url }}");
+				background-size: cover;
+				font-family: 'Montserrat', sans-serif;
+				margin-top: 5vh;
+			}
+			img{
+				border-radius: 10px 0px;
+			}
+			.container{
+				background: rgba(0,0,0,0.1);
+				height: 90vh;
+				border-radius: 10px;
+				border: 1px solid gray;
+			}
+		</style>
+		<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  		<script>tinymce.init({ selector:'#inputContent' });</script>
+	</head>
+	<div class="col-xs-10 col-sm-10 col-md-11">
+		<h2 class="text-warning">Edit Post | {{editPost.title}}</h2>
+	</div>
+	<div class="col-xs-2 col-sm-2 col-md-1">
+		<a href="{{ 'admin/posts' | url }}" class="btn btn-default  btn-xs">Back</a>
+	</div>
+	<br>
+	<!--Si existe result y result es true-->
+	{% if result %}
+		<div class="alert alert-success col-xs-12 col-sm-12 col-md-12 ">Post Updated!</div>';
+	{% endif %}
+	<div class="col-xs-12 col-sm-12 col-md-3">
+		<form method="post">
+		<div class="form-group">
+	      <label for="inputTitle" class="text-warning">Title:</label>
+	      <input type="text" name="title" class="form-control" id="inputTitle" value="{{editPost.title}}">
+	    </div>
+	    <div class="form-group">
+	      <label for="inputImg" class="text-warning">URL Image:</label>
+	      <input type="text" name="img" class="form-control" id="inputImg" value="{{editPost.img_url}}">
+	    </div>
+	    <div class="form-group">
+	      <label for="inputSlug" class="text-warning">Description:</label>
+	      <textarea name="slug" id="inputSlug" rows="8" class="form-control">{{editPost.slug}}</textarea>
+	    </div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-9">
+	    <div class="form-group">
+	      <label for="inputContent" class="text-warning">Content:</label>
+	      <textarea name="content" id="inputContent" rows="10" class="form-control">{{editPost.content}}</textarea>
+	    </div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<button type="submit" class="btn btn-primary btn-lg">Update</button>
+		</form>
+	</div>
+{% endblock %}

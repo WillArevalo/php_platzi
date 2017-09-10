@@ -12,16 +12,33 @@ class PostController extends BaseController{
 
 		return $this->render('admin/posts.twig', ['blogPosts' => $blogPosts]);
 	}
+	public function getEdit($title){
+		$editPost = BlogPost::where('title', $title)->first();
+		return $this->render('admin/edit-post.twig', [
+			'editPost' => $editPost
+			]);
+	}
+	public function postEdit($title){
+		$result = false;
+		$editPost = BlogPost::where('title', $title)->first();
+		$editPost 	-> title =  str_replace(" ","-",$_POST['title']);
+		$editPost	-> content = $_POST['content'];
+		$editPost	-> img_url = $_POST['img'];
+		$editPost	-> slug = $_POST['slug'];
+		$editPost->save();
+		$result = true;
+		return $this->render('admin/edit-post.twig', [
+			'result' => $result,]);
+	}
 	public function getDelete($title){
 
 		$result = false;
 		$deletPost = BlogPost::where('title', $title)->delete();
-		$result = true;
 		header('Location:' . BASE_URL . 'admin/posts' );
+		$result = true;
 		return $this->render('admin/posts.twig', [
 			'result' => $result
 			]);
-
 	}
 	public function getCreate(){
 		//get de admin/posts/create

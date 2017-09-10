@@ -61,6 +61,7 @@
 					<th class="text-muted">Delete</th>
 				</tr>
 			</thead>
+			{% set urlfinalito = 'admin/posts/delete/' | url  %}
 			<tbody>
 				{% for blogPost in blogPosts %}
 					<tr>
@@ -73,15 +74,50 @@
 							</b>
 						</td>
 						<td class="text-primary"><a class="btn btn-success" href="{{('admin/posts/edit/' ~ blogPost.title ) | url }}"><span class="glyphicon glyphicon-pencil"></a></td>
-						<td class="text-danger"> <button class="btn btn-danger btn-popover"><span class="glyphicon glyphicon-trash"></button></td>
+
+						<td class="text-danger"> <a id="{{blogPost.title}}" onclick="deletPost('{{blogPost.title}}','{{urlfinalito}}')" class="btn btn-danger btn-popover"><span class="glyphicon glyphicon-trash"></a></td>
 					</tr>
-					<script>
-						$(document).ready(function(){
-						    $('.btn-popover').popover({title: "¿Desea eliminar el post?", content: "<div class='btn-group'><a href='{{('admin/posts/delete/' ~ blogPost.title ) | url }}' class='btn btn-danger'>Eliminar</a><a href='{{'admin/posts' | url }}' class='btn btn-primary'>Cancelar</a></div>", html: true, placement: "left"}); 
-						});
-					</script>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
+{% endblock %}
+{% block js %}
+	<script>
+		function deletPost(word, first){
+			swal({
+			  title: 'Are you sure?',
+			  text: "You won't be able to revert this!",
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!',
+			  cancelButtonText: 'No, cancel!',
+			  confirmButtonClass: 'btn btn-success',
+			  cancelButtonClass: 'btn btn-danger',
+			  buttonsStyling: false
+			}).then(function () {
+			  swal(
+			    'Deleted!',
+			    'Your file has been deleted.',
+			    'success'
+			  )
+			  	var title; title = word;
+			  	var helper; helper = first; 
+				var urlfinal; urlfinal = helper + title;
+			  	window.location.href = urlfinal;
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  if (dismiss === 'cancel') {
+			    swal(
+			      'Cancelled',
+			      'Your file is safe :)',
+			      'error'
+			    )
+			  }
+			})
+		}
+	</script>
 {% endblock %}
